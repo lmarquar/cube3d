@@ -3,18 +3,11 @@
 
 # include "./mlx/mlx.h"
 # include "libft/libft.h"
+# include "parser/parser.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
-
-/* Map data */
-typedef struct s_map
-{
-	char	**bit_map;
-	//textures
-	//ceiling n floor color
-}	t_map;
 
 /* Player data */
 typedef struct s_player
@@ -24,7 +17,7 @@ typedef struct s_player
 }	t_player;
 
 /* Main data */
-typedef struct s_args
+typedef struct s_graphic
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -35,13 +28,13 @@ typedef struct s_args
 	int		img_sl;
 	int		img_e;
 	int		img_size;
-}	t_args;
+}	t_graphic;
 
 typedef struct s_data
 {
-	t_args		*args;
+	t_graphic	*graphic;
 	t_player	player;
-	t_map		map;
+	t_map		*map;
 }	t_data;
 
 #endif

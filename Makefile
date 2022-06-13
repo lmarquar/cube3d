@@ -1,10 +1,14 @@
-CC			:= gcc
-CFLAGS		:= -Wall -Werror -Wextra -g
-SRC_FILES	:= cube3d.c
-SRCDIR		:= cubeh/
-SRC			:= $(addprefix $(SRCDIR),$(SRC_FILES))
-NAME		:= cube3d
-LIBFT		:= $(SRCDIR)libft/libft.a
+CC				:= gcc
+CFLAGS			:= -Wall -Werror -Wextra -g
+PARSER_FILES	:= parser.c
+PARSER_DIR		:= parser/
+PARSER			:= $(addprefix $(PARSER_DIR),$(PARSER_FILES))
+SRC_FILES		:= cube3d.c $(PARSER)
+SRCDIR			:= cubeh/
+SRC				:= $(addprefix $(SRCDIR),$(SRC_FILES))
+NAME			:= cube3d
+LIBFT_DIR		:= $(SRCDIR)libft/
+LIBFT			:= $(LIBFT_DIR)libft.a
 
 ifeq ($(shell uname -s),Darwin)
 	LBMLX	:= $(SRCDIR)mlx/libmlx.a
@@ -19,12 +23,14 @@ all: $(NAME)
 re: clean $(NAME)
 
 $(NAME): $(LIBFT)
-	$(CC) $(CFLAGS) $(SRC) $(LBMLX) $(LIBS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) $(LBMLX) $(LIBFT) $(LIBS) -o $(NAME)
 
 $(LIBFT):
 	make -C $(SRCDIR)libft/
 
 clean:
-	rm -f $(NAME)
+	make clean -C $(LIBFT_DIR)
 
-fclean: clean
+fclean:
+	make clean -C $(LIBFT_DIR)
+	rm -f $(NAME)

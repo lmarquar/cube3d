@@ -1,12 +1,12 @@
 #include "cube3d.h"
 
-static
+/* static
 int	close_win(void *param)
 {
-	t_args	*x;
+	t_graphic	*x;
 
 	write(1, "hello\n", 6);
-	x = (t_args *) param;
+	x = (t_graphic *) param;
 	x->img_e = 10;
 	mlx_destroy_image(x->mlx_ptr, x->img_ptr);
 	mlx_destroy_window(x->mlx_ptr, x->win_ptr);
@@ -22,9 +22,9 @@ int	close_win(void *param)
 static
 int	khook(int key, void *param)
 {
-	t_args	*x;
+	t_graphic	*x;
 
-	x = (t_args *) param;
+	x = (t_graphic *) param;
 	if (key == 65307)
 	{
 		mlx_destroy_image(x->mlx_ptr, x->img_ptr);
@@ -49,7 +49,7 @@ int	mhook(int button, int x, int y, void *param)
 	return (0);
 }
 
-int	fillmatrix(t_args *mlx)
+int	fillmatrix(t_graphic *mlx)
 {
 	int		row;
 	int		col;
@@ -97,13 +97,11 @@ char	***creatematrix(char *img, int img_size, int img_sl)
 }
 
 static
-t_args	*createwindow(int argc, char *argv[])
+t_graphic	*createwindow(void)
 {
-    argc++;
-    (void) argv;
-	t_args	*x;
+	t_graphic	*x;
 
-	x = malloc(sizeof(t_args));
+	x = malloc(sizeof(t_graphic));
 	x->img_size = 500;
 	x->mlx_ptr = mlx_init();
 	x->img_ptr = mlx_new_image(x->mlx_ptr, x->img_size, x->img_size);
@@ -112,17 +110,25 @@ t_args	*createwindow(int argc, char *argv[])
 	x->img_matrix = creatematrix(x->img, x->img_size, x->img_sl);
 	fillmatrix(x);
 	return (x);
-}
+} */
 
 int	main(int argc, char *argv[])
 {
-	t_args	*x;
+	t_data		*data;
 
-	x = createwindow(argc, argv);
-	mlx_put_image_to_window(x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
-	mlx_hook(x->win_ptr, 17, 0L, close_win, x);
-	mlx_key_hook(x->win_ptr, khook, x);
-	mlx_mouse_hook(x->win_ptr, mhook, x);
-	mlx_loop(x->mlx_ptr);
+	if (argc != 2)
+	{
+		perror("wrong count of arguments provided");
+		return (1);
+	}
+	data = ft_calloc(1, sizeof(data));
+	data->map = parse(argv[1]);
+	//data->graphic = createwindow();
+	// graphic = data->graphic;
+	// mlx_put_image_to_window(graphic->mlx_ptr, graphic->win_ptr, graphic->img_ptr, 0, 0);
+	// mlx_hook(graphic->win_ptr, 17, 0L, close_win, graphic);
+	// mlx_key_hook(graphic->win_ptr, khook, x);
+	// mlx_mouse_hook(graphic->win_ptr, mhook, x);
+	// mlx_loop(graphic->mlx_ptr);
 	return (0);
 }
