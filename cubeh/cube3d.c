@@ -115,21 +115,19 @@ t_graphic	*createwindow(void)
 int	main(int argc, char *argv[])
 {
 	t_data		*data;
-	t_graphic	*graphic;
 
 	if (argc != 2)
 	{
 		perror("wrong count of arguments provided");
-		return (1);
+	//	return (1);
 	}
 	data = ft_calloc(1, sizeof(data));
 	data->map = parse(argv[1]);
 	data->graphic = createwindow();
-	graphic = data->graphic;
-	mlx_put_image_to_window(graphic->mlx_ptr, graphic->win_ptr, graphic->img_ptr, 0, 0);
-	mlx_hook(graphic->win_ptr, 17, 0L, close_win, graphic);
-	mlx_key_hook(graphic->win_ptr, khook, graphic);
-	mlx_mouse_hook(graphic->win_ptr, mhook, graphic);
-	mlx_loop(graphic->mlx_ptr);
+	mlx_put_image_to_window(data->graphic->mlx_ptr, data->graphic->win_ptr, data->graphic->img_ptr, 0, 0);
+	mlx_hook(data->graphic->win_ptr, 17, 0L, close_win, data->graphic);
+	mlx_key_hook(data->graphic->win_ptr, khook, data->graphic);
+	mlx_mouse_hook(data->graphic->win_ptr, mhook, data->graphic);
+	mlx_loop(data->graphic->mlx_ptr);
 	return (0);
 }
