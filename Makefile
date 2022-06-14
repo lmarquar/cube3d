@@ -20,7 +20,7 @@ endif
 
 all: $(NAME)
 
-re: clean $(NAME)
+re: fclean $(NAME)
 
 $(NAME): $(LIBFT)
 	$(CC) $(CFLAGS) $(SRC) $(LBMLX) $(LIBFT) $(LIBS) -o $(NAME)
@@ -32,5 +32,5 @@ clean:
 	make clean -C $(LIBFT_DIR)
 
 fclean:
-	make clean -C $(LIBFT_DIR)
+	make fclean -C $(LIBFT_DIR)
 	rm -f $(NAME)

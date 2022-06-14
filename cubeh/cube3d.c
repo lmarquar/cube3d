@@ -1,6 +1,6 @@
 #include "cube3d.h"
 
-/* static
+static
 int	close_win(void *param)
 {
 	t_graphic	*x;
@@ -110,11 +110,12 @@ t_graphic	*createwindow(void)
 	x->img_matrix = creatematrix(x->img, x->img_size, x->img_sl);
 	fillmatrix(x);
 	return (x);
-} */
+}
 
 int	main(int argc, char *argv[])
 {
 	t_data		*data;
+	t_graphic	*graphic;
 
 	if (argc != 2)
 	{
@@ -123,12 +124,12 @@ int	main(int argc, char *argv[])
 	}
 	data = ft_calloc(1, sizeof(data));
 	data->map = parse(argv[1]);
-	//data->graphic = createwindow();
-	// graphic = data->graphic;
-	// mlx_put_image_to_window(graphic->mlx_ptr, graphic->win_ptr, graphic->img_ptr, 0, 0);
-	// mlx_hook(graphic->win_ptr, 17, 0L, close_win, graphic);
-	// mlx_key_hook(graphic->win_ptr, khook, x);
-	// mlx_mouse_hook(graphic->win_ptr, mhook, x);
-	// mlx_loop(graphic->mlx_ptr);
+	data->graphic = createwindow();
+	graphic = data->graphic;
+	mlx_put_image_to_window(graphic->mlx_ptr, graphic->win_ptr, graphic->img_ptr, 0, 0);
+	mlx_hook(graphic->win_ptr, 17, 0L, close_win, graphic);
+	mlx_key_hook(graphic->win_ptr, khook, graphic);
+	mlx_mouse_hook(graphic->win_ptr, mhook, graphic);
+	mlx_loop(graphic->mlx_ptr);
 	return (0);
 }
